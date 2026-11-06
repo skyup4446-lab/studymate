@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>스터디메이트 - 같이 공부할 사람과 스터디카페를 찾아요</title>
+  <meta name="description" content="우리 동네 스터디카페와 나에게 맞는 스터디원을 한 번에 찾아 주는 스터디메이트">
+
+  <!-- 탭 아이콘 -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- 링크 공유 미리보기 (카카오톡, 슬랙 등) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="스터디메이트 - 같이 공부할 사람과 스터디카페를 찾아요">
+  <meta property="og:description" content="우리 동네 스터디카페와 나에게 맞는 스터디원을 한 번에 찾아 드려요.">
+  <meta property="og:image" content="https://studymate-taupe.vercel.app/og-image.png">
+  <meta property="og:url" content="https://studymate-taupe.vercel.app">
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,10 +25,12 @@
   <header class="header">
     <div class="container header-inner">
       <a href="#hero" class="logo">
-        <span class="logo-icon">📚</span>
+        <img src="logo.svg" alt="" class="logo-img" width="48" height="48">
         <span class="logo-text">스터디메이트</span>
       </a>
-      <nav class="nav">
+      <button class="menu-btn" id="menu-btn" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+      <nav class="nav" id="nav">
+        <a href="#cafes">스터디카페 찾기</a>
         <a href="#features">주요 기능</a>
         <a href="#reviews">후기</a>
         <a href="#faq">자주 묻는 질문</a>
@@ -27,15 +42,64 @@
   <main>
     <!-- 메인 소개 -->
     <section id="hero" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="badge">📍 우리 동네 스터디카페 · 스터디원 매칭</span>
+          <h1>혼자 하기 힘든 공부,<br><span class="accent">스터디메이트</span>와 함께해요</h1>
+          <p class="hero-sub">우리 동네 스터디카페와 나에게 맞는 스터디원을 한 번에 찾아 드려요.</p>
+          <div class="hero-btns">
+            <a href="#signup" class="btn">지금 시작하기</a>
+            <a href="#cafes" class="btn btn-outline">스터디카페 둘러보기</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>8곳</strong><span>등록 스터디카페</span></li>
+            <li><strong>4.6</strong><span>평균 평점</span></li>
+            <li><strong>1분</strong><span>가입 시간</span></li>
+          </ul>
+        </div>
+        <div class="hero-image">
+          <img src="hero.svg" alt="스터디메이트 앱 화면 예시" width="360" height="440">
+        </div>
+      </div>
+    </section>
+
+    <!-- 스터디카페 찾기 (체험 데모) -->
+    <section id="cafes" class="section gray">
       <div class="container">
-        <h1>혼자 하기 힘든 공부,<br>스터디메이트와 함께해요</h1>
-        <p class="hero-sub">우리 동네 스터디카페와 나에게 맞는 스터디원을 한 번에 찾아 드려요.</p>
-        <a href="#signup" class="btn">지금 시작하기</a>
+        <h2>스터디카페 찾아보기</h2>
+        <p class="section-sub">동네를 고르고 정렬해 보세요. (샘플 데이터예요)</p>
+
+        <div class="controls">
+          <label>동네
+            <select id="area-select">
+              <option value="전체">전체</option>
+              <option value="강남">강남</option>
+              <option value="홍대">홍대</option>
+              <option value="신촌">신촌</option>
+              <option value="건대">건대</option>
+            </select>
+          </label>
+          <label>정렬
+            <select id="sort-select">
+              <option value="rating">평점 높은 순</option>
+              <option value="distance">가까운 순</option>
+              <option value="price">저렴한 순</option>
+            </select>
+          </label>
+          <span id="result-count" class="result-count"></span>
+        </div>
+
+        <div class="cafe-layout">
+          <div class="map" id="map" aria-label="스터디카페 지도 (샘플)">
+            <div class="me">내 위치</div>
+          </div>
+          <div class="cafe-list" id="cafe-list"></div>
+        </div>
       </div>
     </section>
 
     <!-- 주요 기능 -->
-    <section id="features" class="section gray">
+    <section id="features" class="section">
       <div class="container">
         <h2>주요 기능</h2>
         <div class="cards">
@@ -63,6 +127,15 @@
       </div>
     </section>
 
+    <!-- 베스트 스터디카페 -->
+    <section id="best" class="section gray">
+      <div class="container">
+        <h2>🏆 이번 주 베스트 스터디카페</h2>
+        <p class="section-sub">평점과 후기 수를 종합한 TOP 3예요.</p>
+        <div class="best-list" id="best-list"></div>
+      </div>
+    </section>
+
     <!-- 후기 (가상) -->
     <section id="reviews" class="section">
       <div class="container">
@@ -71,17 +144,26 @@
           <div class="review">
             <div class="stars">★★★★★</div>
             <p>"집 근처에 이렇게 좋은 스터디카페가 있는 줄 몰랐어요. 지도로 바로 보여서 편해요!"</p>
-            <div class="writer">김민지 · 취업 준비생</div>
+            <div class="writer-row">
+              <div class="avatar" style="background:#2563eb">김</div>
+              <div class="writer"><strong>김민지</strong><span>취업 준비생 · 강남</span></div>
+            </div>
           </div>
           <div class="review">
             <div class="stars">★★★★★</div>
             <p>"같은 목표를 가진 스터디원을 만나서 혼자일 때보다 훨씬 꾸준히 공부하게 됐어요."</p>
-            <div class="writer">박준호 · 대학생</div>
+            <div class="writer-row">
+              <div class="avatar" style="background:#10b981">박</div>
+              <div class="writer"><strong>박준호</strong><span>대학생 · 건대</span></div>
+            </div>
           </div>
           <div class="review">
             <div class="stars">★★★★☆</div>
             <p>"동네별로 정렬되고 평점도 보여서 카페 고르기가 정말 쉬워졌어요. 베스트 추천도 좋아요."</p>
-            <div class="writer">이서연 · 직장인</div>
+            <div class="writer-row">
+              <div class="avatar" style="background:#f59e0b">이</div>
+              <div class="writer"><strong>이서연</strong><span>직장인 · 홍대</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -119,8 +201,9 @@
           <input type="text" id="name" placeholder="이름" required>
           <input type="email" id="email" placeholder="이메일" required>
           <button type="submit" class="btn">가입하기</button>
-          <p id="message" class="message"></p>
+          <p id="message" class="message" role="status"></p>
         </form>
+        <p id="signup-count" class="center small"></p>
       </div>
     </section>
   </main>

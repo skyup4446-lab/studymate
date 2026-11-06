@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>스터디메이트 - 같이 공부할 사람과 스터디카페를 찾아요</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 상단: 로고 + 메뉴 -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-icon">📚</span>
+        <span class="logo-text">스터디메이트</span>
+      </a>
+      <nav class="nav">
+        <a href="#features">주요 기능</a>
+        <a href="#reviews">후기</a>
+        <a href="#faq">자주 묻는 질문</a>
+        <a href="#signup" class="nav-btn">가입하기</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- 메인 소개 -->
+    <section id="hero" class="hero">
+      <div class="container">
+        <h1>혼자 하기 힘든 공부,<br>스터디메이트와 함께해요</h1>
+        <p class="hero-sub">우리 동네 스터디카페와 나에게 맞는 스터디원을 한 번에 찾아 드려요.</p>
+        <a href="#signup" class="btn">지금 시작하기</a>
+      </div>
+    </section>
+
+    <!-- 주요 기능 -->
+    <section id="features" class="section gray">
+      <div class="container">
+        <h2>주요 기능</h2>
+        <div class="cards">
+          <div class="card">
+            <div class="icon">📍</div>
+            <h3>주변 스터디카페 위치</h3>
+            <p>내 위치 기준으로 가까운 스터디카페를 지도에서 바로 확인해요.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🤝</div>
+            <h3>스터디메이트 매칭</h3>
+            <p>학습 목표와 시간대가 비슷한 스터디원을 추천해 드려요.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🏘️</div>
+            <h3>동네별 스터디카페 정렬</h3>
+            <p>동네를 고르면 요금, 거리, 평점 순으로 정렬해서 보여 줘요.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🏆</div>
+            <h3>베스트 스터디카페 추천</h3>
+            <p>이용자 평점이 높은 인기 스터디카페를 매주 추천해 드려요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 후기 (가상) -->
+    <section id="reviews" class="section">
+      <div class="container">
+        <h2>이용자 후기</h2>
+        <div class="reviews">
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"집 근처에 이렇게 좋은 스터디카페가 있는 줄 몰랐어요. 지도로 바로 보여서 편해요!"</p>
+            <div class="writer">김민지 · 취업 준비생</div>
+          </div>
+          <div class="review">
+            <div class="stars">★★★★★</div>
+            <p>"같은 목표를 가진 스터디원을 만나서 혼자일 때보다 훨씬 꾸준히 공부하게 됐어요."</p>
+            <div class="writer">박준호 · 대학생</div>
+          </div>
+          <div class="review">
+            <div class="stars">★★★★☆</div>
+            <p>"동네별로 정렬되고 평점도 보여서 카페 고르기가 정말 쉬워졌어요. 베스트 추천도 좋아요."</p>
+            <div class="writer">이서연 · 직장인</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 자주 묻는 질문 -->
+    <section id="faq" class="section gray">
+      <div class="container narrow-wide">
+        <h2>자주 묻는 질문</h2>
+        <details class="faq-item">
+          <summary>스터디메이트는 무료인가요?</summary>
+          <p>기본 기능(스터디카페 검색, 매칭)은 무료로 이용할 수 있어요.</p>
+        </details>
+        <details class="faq-item">
+          <summary>스터디원은 어떻게 매칭되나요?</summary>
+          <p>가입할 때 입력한 학습 목표, 관심 분야, 가능한 시간대를 바탕으로 비슷한 분들을 추천해 드려요.</p>
+        </details>
+        <details class="faq-item">
+          <summary>우리 동네 스터디카페도 볼 수 있나요?</summary>
+          <p>네, 동네를 선택하면 해당 지역의 스터디카페를 요금·거리·평점 순으로 정렬해서 볼 수 있어요.</p>
+        </details>
+        <details class="faq-item">
+          <summary>베스트 스터디카페는 어떻게 정해지나요?</summary>
+          <p>이용자 평점과 후기 수를 종합해서 매주 업데이트해요.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- 가입 폼 -->
+    <section id="signup" class="section">
+      <div class="container narrow">
+        <h2>지금 가입해 보세요</h2>
+        <p class="center">이메일을 남기면 출시 소식을 가장 먼저 알려 드려요.</p>
+        <form id="signup-form" class="form">
+          <input type="text" id="name" placeholder="이름" required>
+          <input type="email" id="email" placeholder="이메일" required>
+          <button type="submit" class="btn">가입하기</button>
+          <p id="message" class="message"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 스터디메이트. 부트캠프 과제용 샘플 페이지입니다.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
